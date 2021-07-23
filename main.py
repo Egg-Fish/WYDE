@@ -96,9 +96,9 @@ def attemptQuestion(data):
 
 @socketio.event
 def getDecks(data):
-    player = session["player"]
+    student = session["student"]
 
-    deck_ids = dbcontroller.get_decks_from_class_id(player["class_id"])
+    deck_ids = dbcontroller.get_decks_from_class_id(student["class_id"])
 
     emit("getDecks", deck_ids)
 
@@ -106,6 +106,12 @@ def getDecks(data):
 def getDeckInfo(data):
     deck = dbcontroller.get_deck_from_deck_id(data["deck_id"])
     emit("getDeckInfo", deck)
+
+@socketio.event
+def getUserInfo():
+    session["student"] = dbcontroller.get_student_from_username(session["student"][2])
+    emit("getUserInfo", session["student"])
+
 
 
 # TEST
