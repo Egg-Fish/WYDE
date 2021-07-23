@@ -1,7 +1,6 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
-  background-image: url("../images/bg2.jpg")
 }
 
 
@@ -140,28 +139,34 @@ a{
 }
 
 
-.main{
+.main {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-gap: 16px;
+  justify-content: center;
+  padding: initial;
+  margin-top: 20px;
+}
+
+.main .card {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: initial;
   align-items: center;
-  width: 800px;
-  height: 430px;
-  background-color: #fff;
-  margin: 100px auto;
+  width: 300px;
+  height: 300px;
+  background-color: none;
+  margin: 10px 10px;
+  padding: 10px 10px;
   border: 1px solid #bdbdbd;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
-.main p{
-  position: relative;
-  left: 0px;
-}
-
-.main .button {
+.main .card .button {
   position: absolute;
-  bottom: 30px;
+  bottom: 15px;
   background: #85e481;
   border-radius: 20px;
   height: 50px;
@@ -169,6 +174,16 @@ a{
   border: none;
 }
 
-.main .button:hover{
+.main .card .button:hover{
   background: pink;
+}
+
+.main .card .big{
+  padding-top: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.main .card p{
+  font-size: 17px;
 }

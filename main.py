@@ -179,6 +179,33 @@ def startquiz(deck_id):
     deck = dbcontroller.get_deck_from_deck_id(deck_id)
     return render_template("cards.html", deck=deck, student=session["student"], dbcontroller=dbcontroller)
 
+@app.route("/editdeck/<deck_id>")
+def editdeck(deck_id):
+    card_ids = list(map(int, dbcontroller.get_cards_in_deck(deck_id)))
+
+    cards = [dbcontroller.get_flashcard(i) for i in card_ids]
+
+    return render_template("cards-holders.html", cards=cards, student=session["student"], dbcontroller=dbcontroller)
+
+@app.route("/addfc", methods=["GET", "POST"])
+def addfc():
+    if "student" not in session:
+        return redirect("/") # login
+
+    if request.method == "GET":
+        decks = dbcontroller.get_decks()
+        return render_template("add-fc.html", student=session["student"], dbcontroller=dbcontroller, decks=decks, success=False)
+
+    elif request.method == "POST":
+        if request.form["points"]:
+            dbcontroller.add_quizquestion(request.form["deck_id"], request.form["question"], request.form["answer"], request.form["points"])
+        else:
+            dbcontroller.add_flashcard(request.form["deck_id"], request.form["question"], request.form["answer"])
+
+        decks = dbcontroller.get_decks()
+        return render_template("add-fc.html", student=session["student"], dbcontroller=dbcontroller, decks=decks, success=True)
+
+
 #  ____   ___   ____ _  _______ _____ ___ ___  
 # / ___| / _ \ / ___| |/ / ____|_   _|_ _/ _ \ 
 # \___ \| | | | |   | ' /|  _|   | |  | | | | |

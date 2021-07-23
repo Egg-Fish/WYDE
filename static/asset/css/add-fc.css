@@ -202,3 +202,11 @@ label{
   float:left;
   margin-right: 40px;
 }
+
+#hello:hover{
+  background-color: #f08080;
+}
+
+label{
+  font-weight: bold;
+}

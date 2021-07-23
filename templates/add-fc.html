@@ -4,16 +4,18 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
+  
     <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
-
+  
     <!-- Template Main CSS File -->
-    <link href="{{url_for('static', filename='asset/css/main-page.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='asset/css/add-fc.css')}}" rel="stylesheet">
 
+    {% if success %}
+    <script>alert("Flashcard Saved Successfully!");</script>
+    {% endif %}
   </head>
 
-  <body>
-
+<body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top d-flex align-items-center">
@@ -49,28 +51,39 @@
   </div>
 </header><!-- End Header -->
 
-    <div class="container main">
-      <!-- START OF CARDS -->
-      <!-- <div class="card">
-        <p class="text"><i class="fas fa-book mr-2"></i>HEAD</p>
-        <p class="text">Name</p>
-        <p class="text">Description</p>
-        <button class="button text" onclick="window.location.href='cards.html'">Start Revision</button>
-      </div> -->
-      {% for deck in decks %}
-      
-      <div class="card">
-        <p class="text"><i class="fas fa-book mr-2"></i><b>{{ deck[1] }}</b></p>
-        <p class="text">ID: {{ deck[0] }}</p>
-        <p class="text">{{ deck[2] }}</p>
-        {% if student[-1] == "TEACHER" %}
-        <button class="button text" onclick="window.location = '/editdeck/{{ deck[0] }}'">Edit Deck</button>
-        {% else %}
-        <button class="button text" onclick="window.location = '/startquiz/{{ deck[0] }}'">Start Revision</button>
-        {% endif %}
-      </div>
+  <div class="sign-up">
+    <h3>Add Flashcards</h3>
+    <form id="form" method="post" action="/addfc">
+        <div class="deck">
+          <label for="deck_id">Deck: </label><br>
+          <select id="deck_id" name="deck_id" style="width: 160px; height: 36px;">
+            <!-- Dropdown values -->
+            <!-- <option value="value1">value1</option> -->
+            {% for deck in decks %}
+            <option value="{{deck[0]}}">{{deck[1]}}</option>
+            {% endfor %}
 
-      {% endfor %}
-    </div>
-  </body>
+          </select><br>
+        </div>
+
+      <div class="beside-deck">
+        <label for="points">Points: </label><br>
+        <input type="number" id="points" name="points">
+      </div><br>
+
+      <label for="question">Question:</label><br>
+      <textarea name="question" cols="45" rows="2" required></textarea>
+      <label for="answer">Answer:</label><br>
+      <textarea name="answer" cols="45" rows="3" required></textarea>
+
+      <div class="sign-up-2">
+        <input id="hello" type="submit" value="Add">
+      </div>
+    </form>
+    <p><span id='display'></span></p>
+  </div>
+
+
+
+</body>
 </html>

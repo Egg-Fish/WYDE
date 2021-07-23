@@ -8,3 +8,5 @@ id,deck_id,question,answer,points
 6,87654321,This question is also in deck two,true,0
 7,87654321,What year is it?,2021,400
 8,87654321,Will we win this hackathon?,The quick brown fox jumps over the lazy dog,500
+9,87654321,Testing addfc,727,0
+10,87654321,Testing quizquestion,WYSI,727

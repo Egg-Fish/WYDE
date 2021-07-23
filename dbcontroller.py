@@ -7,7 +7,7 @@ def add_flashcard(deck_id, question, answer):
 
     f = open("db\cards.csv", "a+")
     flashcard_id = str(int(lines[-1][0]) + 1)           #taking reference from the last line's id, + 1
-    f.write("{},{},{},{},{}\n".format(flashcard_id, deck_id, str(question), str(answer), 0))
+    f.write("{},{},{},{},0\n".format(flashcard_id, deck_id, str(question), str(answer)))
 
     f.close()
 

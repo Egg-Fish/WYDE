@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+  
+    <!-- Template Main CSS File -->
+    <link href="{{url_for('static', filename='asset/css/cards-holders.css')}}" rel="stylesheet">
+  
+    <script src="/static/socket.io.js"></script>
+    <script>
+      var socket = io();
+      var current_card_no = -1;
+  
+      function nextCard()
+      {
+        var deck_id = window.location.pathname.slice(-8);
+        console.log(current_card_no);
+        console.log(deck_id);
+        socket.emit("nextCard", {"id": current_card_no, "deck_id": deck_id});
+      }
+  
+      socket.on("nextCard", function(data){
+        console.log(data);
+        var question = document.getElementById("questions");
+        card = data;
+        current_card_no = parseInt(card[0], 10);
+        points = parseInt(card[4], 10);
+        question.innerHTML = "<span style='text-decoration: underline;'>Question:</span><br>" + card[2];
+  
+        if (points > 0){
+          document.getElementsByTagName("form")[0].setAttribute("style", "display:block");
+        }
+        else{
+          document.getElementsByTagName("form")[0].setAttribute("style", "display:none");
+        }
+        
+        var btn = document.getElementById("button");
+        btn.setAttribute("onclick", "attemptQuestion()");
+        btn.innerText = "Show Answer";
+      });
+  
+  
+      function attemptQuestion()
+      {
+        var deck_id = window.location.pathname.slice(-8);
+        console.log(current_card_no);
+        console.log(deck_id);
+        document.getElementsByTagName("form")[0].setAttribute("style", "display:none");
+        attempt = document.getElementById("attempt").value;
+        document.getElementById("attempt").value = "";
+        socket.emit("attemptQuestion", {"id": current_card_no, "attempt": attempt, "deck_id": deck_id});
+      }
+  
+      socket.on("attemptQuestion", function(data){
+        console.log(data);
+        var question = document.getElementById("questions");
+        card = data["current_card"];
+        current_card_no = parseInt(card[0], 10);
+        question.innerHTML = "<span style='text-decoration: underline;'>Answer:</span><br>" + card[3];
+        
+        var btn = document.getElementById("button");
+        btn.setAttribute("onclick", "nextCard()");
+        btn.innerText = "Next Question";
+      });
+  
+      socket.on("endOfDeck", function(){
+        console.log("received endOfDeck SIGNAL");
+        var question = document.getElementById("questions");
+        question.innerHTML = "<span style='text-decoration: underline;'>End of Deck:</span><br>" + "You have finished all of the cards in this deck.";
+        
+        var btn = document.getElementById("button");
+        btn.setAttribute("onclick", "window.location = '/';");
+        btn.innerText = "End Revision";
+      });
+  
+    </script>
+  
+  </head>
+
+<body>
+
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center">
+  <div class="container d-flex align-items-center">
+    <h1 class="logo me-auto"><a href="/">KYDE EDU</a></h1>
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a href="/">Deck</a></li>
+        <li><a href="/">Quiz</a></li>
+        {% if student[-1] == "TEACHER" %}
+          <li class="dropdown"><a href=""><span>Add new</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="/adddeck">Add Decks</a></li>
+              <li><a href="/addfc">Add Flashcards / Quiz Questions</a></li>
+
+            </ul>
+          </li>
+          {% endif %}
+        <!--<li class="dropdown"><a href="#"><span>Classes</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="#">Drop Down 1</a></li>
+          </ul>-->
+        <li class="display">
+          <a id="imagess" href="sign-up.html"><img src="{{url_for('static', filename='asset/images/images.png')}}"><p class="account text" style="font-size: 15px;">{{ student[1] }}</p></a>
+          <ul>
+            <li><a href="/signout">Sign out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+  <div class="container main">
+    <!-- Start of Cards -->
+    <!-- <div class="card">
+      <p class="big"><i class="fas fa-book mr-2"></i>Question</p>
+      <p>answer</p>
+      <button class="button" onclick="window.location.href='/editcard/<card_id>'">Edit card</button>
+    </div> -->
+    {% for card in cards %}
+
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>{{card[2]}}</p>
+      <p class="text">{{card[3]}}</p>
+      <button class="button text" onclick="window.location.href='/editcard/{{card[0]}}'">Edit card</button>
+    </div>
+    
+    {% endfor %}
+
+  </div>
+</body>
+</html>

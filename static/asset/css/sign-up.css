@@ -16,21 +16,30 @@ body{
 
 .contain{
   border: 2px solid red;
-  width: 420px;
+  width: 480px;
   margin: 80px auto;
   background-color: white;
   border-radius: 20px;
 }
 
-.log-head{
+.sign-head{
   padding: 20px 0px 0px 50px;
 }
 
-.log-head img{
-  float: left;
+.sign-head h4{
+  font-weight: bold;
+  font-size: 32px;
+  color: red;
+  left: 30px;
+  font-family: sans-serif;
 }
 
-.log-head a{
+.sign-head img{
+  float: left;
+  margin-left: 40px;
+}
+
+.sign-head a{
   font-weight: bold;
   font-family: Helvetica,sans-serif;
   text-align: center;
@@ -42,6 +51,14 @@ body{
 }
 
 
+.studid{
+  float: left;
+  margin-right: 40px;
+}
+
+.usern{
+  left: 0px;
+}
 
 .word{
   line-height: 60%;
@@ -56,7 +73,7 @@ body{
   font-size: 30px;
 }
 
-.log-in{
+.sign-up{
   color: black;
   margin: 0 auto;
   margin-top: 50px;
@@ -69,8 +86,8 @@ body{
   padding-top: 20px;
 }
 
-.log-in input[type=text],
-.log-in input[type=password]{
+.sign-up input[type=text],
+.sign-up input[type=password]{
   border: none;
   border-bottom: 1px solid black;
   background-color: transparent;
@@ -79,7 +96,7 @@ body{
   font-size: 16px;
 }
 
- .log-in-2{
+ .sign-up-2{
    line-height: 40px;
  }
 
