@@ -9,6 +9,12 @@ app.config["SECRET_KEY"] = "secret"
 
 socketio = SocketIO(app)
 
+#  ____   ___  _   _ _____ _____ ____  
+# |  _ \ / _ \| | | |_   _| ____/ ___| 
+# | |_) | | | | | | | | | |  _| \___ \ 
+# |  _ <| |_| | |_| | | | | |___ ___) |
+# |_| \_\\___/ \___/  |_| |_____|____/ 
+
 @app.route("/addstudent", methods=["POST"])
 def addstudent():
     student_id = request.form["student_id"]
@@ -17,18 +23,24 @@ def addstudent():
     email = request.form["email"]
     class_id = request.form["class_id"]
 
-@app.route("/login", methods=["POST"])
+
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    username = request.form["username"]
-    password = request.form["password"]
+    if method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
 
-    # Authenticate
+        # Authenticate
 
-    session["username"] = username
-    student = dbcontroller.get_student_from_username(username)
-    session["student"] = student
+        session["username"] = username
+        student = dbcontroller.get_student_from_username(username)
+        session["student"] = student
 
-    return redirect("/dashboard.html")
+        return redirect("/dashboard.html")
+
+    elif request.method == "GET":
+        return "REMOVE"
 
 @app.route("/addflashcard", methods=["GET", "POST"])
 def addflashcard():
@@ -39,6 +51,9 @@ def addflashcard():
 
         dbcontroller.add_flashcard(int(deck_id), question, answer)
 
+    elif request.method == "GET":
+        return "REMOVE"
+
 @app.route("/addquizquestion", methods=["GET", "POST"])
 def addquizquestion():
     if request.method == "POST":
@@ -48,6 +63,45 @@ def addquizquestion():
 
         dbcontroller.add_quizquestion(int(deck_id), question, answer)
 
+    elif request.method == "GET":
+        return "REMOVE"
+
+@app.route("/adddeck", methods=["GET", "POST"])
+def adddeck():
+    if request.method == "POST":
+        deck_id = request.form["deck_id"]
+        name = request.form["name"]
+        description = request.form["description"]
+
+        dbcontroller.add_deck(deck_id, name, description)
+
+    elif request.method == "GET":
+        return "REMOVE"
+
+@app.route("/", methods=["GET"])
+def index():
+    if "student" not in session:
+        return render_template("REMOVE") # login
+
+    else:
+        return render_template("REMOVE") # dashboard
+
+@app.route("/startdeck/<deck_id>")
+def startdeck(deck_id):
+    session["inQuiz"] = False
+    return render_template("REMOVE", deck_id=deck_id)
+
+@app.route("/startquiz/<deck_id>")
+def startquiz(deck_id):
+    session["current_card_id"] = 0
+    session["inQuiz"] = True
+    return render_template("REMOVE", deck_id=deck_id)
+
+#  ____   ___   ____ _  _______ _____ ___ ___  
+# / ___| / _ \ / ___| |/ / ____|_   _|_ _/ _ \ 
+# \___ \| | | | |   | ' /|  _|   | |  | | | | |
+#  ___) | |_| | |___| . \| |___  | |  | | |_| |
+# |____/ \___/ \____|_|\_\_____| |_| |___\___/ 
 
 
 @socketio.event
@@ -55,8 +109,8 @@ def nextCard(data):
     current_card_id = int(data["id"])
     inQuiz = False
 
-    if "inQUiz" in session:
-        inQuiz = True
+    if "inQuiz" in session:
+        inQuiz = session["inQuiz"]
 
     current_card = dbcontroller.get_flashcard(current_card_id)
     if not current_card:
