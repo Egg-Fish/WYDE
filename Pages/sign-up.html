@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Web dev</title>
+
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="asset/css/sign-up.css" rel="stylesheet">
+
+</head>
+<body>
+  <script>
+	function validate() {
+	}
+  </script>
+  <div class="contain">
+    <div class="word">
+      <h1>KYDE Learn</h1>
+      <div class="sign-head">
+        <img src="asset/images/teacher.png" width="80"><br><br>
+        <h4><pre>  Sign Up <pre></h4>
+      </div>
+    </div>
+    <div class="sign-up">
+      <form id="form" method="post" action="">
+      <label for="username">Username</label><br>
+      <input type="text" id="username" name="username" pattern="[A-Z0-9]{5}" minlength="5" maxlength="5" size="33" autofocus required><br><br>
+      <label for="pass">Password</label><br>
+      <input type="password" id="password" name="password" size="33" autofocus required><br>
+      <p id="passwrong"></p><br>
+      <div class="sign-up-2">
+        <input id="hello" type="submit" value="Sign Up" onclick="validate()">
+      </div>
+      </form>
+    </div>
+    <div style="text-align:center">
+      <a href="landing-page.html"><span class="dot""></span></a>
+      <a href="#"><span class="dot" style="background-color: red;"></span></a>
+    </div>
+  </div>
+</body>
+</html>
