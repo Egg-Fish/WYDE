@@ -1,2 +1,5 @@
 id,deck_id,question,answer,points
-0000,0000,,0
+0000,0,,,0
+2,1,1 + 1 = ?,2,500
+3,1,Are you yonglin?,Yes I am ONG,0
+4,1,1 + 1 = ?,2,500
