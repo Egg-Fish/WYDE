@@ -199,6 +199,9 @@ def test(path):
     print(path)
     return send_file("Pages/" + path)
 
+@app.route("/render/<filename>")
+def testrender(filename):
+    return render_template(filename)
 
 
 if __name__ == "__main__":
