@@ -42,15 +42,17 @@
       </div>
     </div>
     <div class="log-in">
-      <form id="form" method="post" action="main-page.html" onsubmit="return false">
-      <label for="username">Username</label><br>
-      <input type="text" id="username" name="username" size="33" autofocus required><br><br>
-      <label for="pass">Password</label><br>
-      <input type="password" id="password" name="password" size="33" autofocus required><br>
-      <p id="passwrong"></p><br>
-      <div class="sign-up-2">
-        <input id="hello" type="submit" value="Log In" onclick="validate()">
-      </div>
+      <form id="form" method="POST" action="/login">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" size="33" autofocus required><br><br>
+        <label for="pass">Password</label><br>
+        <input type="password" id="password" name="password" size="33" autofocus required><br>
+        <p id="passwrong"></p><br>
+
+        <div class="sign-up-2">
+          <input id="hello" type="submit" value="Log In" onclick="validate()">
+        </div>
+
       </form>
       <p><span id='display'></span></p>
     </div>

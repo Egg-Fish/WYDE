@@ -9,7 +9,7 @@ import dbcontroller
 import quiz
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "secret"
+app.config["SECRET_KEY"] = os.urandom(24)
 
 socketio = SocketIO(app)
 
@@ -48,7 +48,7 @@ def addstudent():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if method == "POST":
+    if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
 
@@ -58,13 +58,21 @@ def login():
             student = dbcontroller.get_student_from_username(username)
             session["student"] = student
 
-            return redirect("/dashboard.html")
+            return redirect("/")
         
         else:
-            return render_template("REMOVE") # login page
+            return render_template("landing-page.html") # login page
 
     elif request.method == "GET":
-        return render_template("REMOVE") # login page
+        return render_template("landing-page.html") # login page
+
+
+@app.route("/signout")
+def signout():
+    session.pop("username")
+    session.pop("student")
+
+    return redirect("/")
 
 @app.route("/addflashcard", methods=["GET", "POST"])
 def addflashcard():
@@ -105,18 +113,27 @@ def adddeck():
 @app.route("/", methods=["GET"])
 def index():
     if "student" not in session:
-        return render_template("REMOVE") # login
+        return render_template("landing-page.html") # login
 
     else:
-        return render_template("REMOVE") # dashboard
+        decks = dbcontroller.get_decks()
+        student = session["student"]
+        return render_template("main-page.html", decks=decks, dbcontroller=dbcontroller, student=student)
 
 @app.route("/startdeck/<deck_id>")
 def startdeck(deck_id):
+    if "student" not in session:
+        return redirect("/") # login
+
     session["inQuiz"] = False
-    return render_template("REMOVE", deck_id=deck_id)
+    deck = dbcontroller.get_deck_from_deck_id(deck_id)
+    return render_template("cards.html", deck=deck, student=session["student"], dbcontroller=dbcontroller)
 
 @app.route("/startquiz/<deck_id>")
 def startquiz(deck_id):
+    if "student" not in session:
+        return redirect("/") # login
+
     session["current_card_id"] = 0
     session["inQuiz"] = True
     return render_template("REMOVE", deck_id=deck_id)
