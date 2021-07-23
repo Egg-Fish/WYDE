@@ -24,11 +24,15 @@ socketio = SocketIO(app)
 def authenticate(username, password):
     student = dbcontroller.get_student_from_username(username)
 
-    password_hash = hashlib.sha256(bytes(password, encoding='utf-8')).hexdigest()
+    if student:
+        password_hash = hashlib.sha256(bytes(password, encoding='utf-8')).hexdigest()
 
-    student_hash = student[3]
+        student_hash = student[3]
 
-    return password_hash == student_hash
+        return password_hash == student_hash
+
+    else:
+        return False
     
 
 @app.route("/addstudent", methods=["POST"])
@@ -65,6 +69,34 @@ def login():
 
     elif request.method == "GET":
         return render_template("landing-page.html") # login page
+
+@app.route("/loginteacher", methods=["GET", "POST"])
+def loginTeacher():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        #if authenticate(username, password):
+        if True:
+
+            session["username"] = username
+            student = dbcontroller.get_student_from_username(username)
+            session["student"] = [
+                "99999999", 
+                "TEACHER", 
+                "TEACHER", 
+                "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", 
+                "teacher@wyde.com", 
+                "0000", 
+                "TEACHER"]
+
+            return redirect("/")
+        
+        else:
+            return render_template("teacher-log.html") # login page
+
+    elif request.method == "GET":
+        return render_template("teacher-log.html") # login page
 
 
 @app.route("/signout")
@@ -119,6 +151,15 @@ def index():
         decks = dbcontroller.get_decks()
         student = session["student"]
         return render_template("main-page.html", decks=decks, dbcontroller=dbcontroller, student=student)
+
+
+@app.route("/teacher")
+def teacherLogin():
+    return render_template("teacher-log.html")
+
+@app.route("/student")
+def studentLogin():
+    return render_template("landing-page.html")
 
 @app.route("/startdeck/<deck_id>")
 def startdeck(deck_id):

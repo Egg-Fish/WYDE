@@ -38,11 +38,11 @@
       <h1>KYDE Learn</h1>
       <div class="log-head">
         <img src="{{url_for('static', filename='asset/images/teacher.png')}}" width="80"><br><br>
-        <h4><pre>  <a href="/student" style="color: red;">Student</a> / <a href="/teacher">Teacher</a></pre></h4>
+        <h4><pre>  <a href="/student">Student</a> / <a href="/teacher" style="color: red;">Teacher</a></pre></h4>
       </div>
     </div>
     <div class="log-in">
-      <form id="form" method="post" action="/login">
+      <form id="form" method="post" action="/loginteacher">
       <label for="username">Username</label><br>
       <input type="text" id="username" name="username" size="33" autofocus required><br><br>
       <label for="pass">Password</label><br>

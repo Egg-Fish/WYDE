@@ -62,7 +62,11 @@
         <p class="text"><i class="fas fa-book mr-2"></i><b>{{ deck[1] }}</b></p>
         <p class="text">ID: {{ deck[0] }}</p>
         <p class="text">{{ deck[2] }}</p>
+        {% if student[-1] == "TEACHER" %}
+        <button class="button text" onclick="window.location = '/editdeck/{{ deck[0] }}'">Edit Deck</button>
+        {% else %}
         <button class="button text" onclick="window.location = '/startdeck/{{ deck[0] }}'">Start Revision</button>
+        {% endif %}
       </div>
 
       {% endfor %}
