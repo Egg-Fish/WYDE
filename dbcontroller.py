@@ -88,11 +88,11 @@ def get_flashcard(id) -> list:
         if i[0] == str(id):
             return i
 
-def add_student(student_id,name,username,password,email,class_id):      #tested
+def add_student(student_id,name,username,password,email,class_id):      
     f = open("db\students.csv","a+")
     f.write("{},{},{},{},{},{}\n".format(student_id,name,username,password,email,class_id))
 
-def remove_student(student_id):     #tested
+def remove_student(student_id):     
     student_id = str(student_id)
     f = open("db\students.csv", "r")
     lines = f.readlines()
@@ -114,7 +114,7 @@ def remove_student(student_id):     #tested
 
     f.close()
 
-def get_student_from_username(username):            #tested
+def get_student_from_username(username):            
     f = open("db\students.csv","r")
     studentlist = []
     for i in f:
@@ -123,7 +123,7 @@ def get_student_from_username(username):            #tested
         if i[2] == username:
             return i
 
-def get_student_from_id(student_id):                #tested
+def get_student_from_id(student_id):                
     student_id = str(student_id)
     f = open("db\students.csv","r")
     studentlist = []
@@ -133,7 +133,7 @@ def get_student_from_id(student_id):                #tested
         if i[0] == student_id:
             return i
 
-def get_student_id_from_username(username):         #tested
+def get_student_id_from_username(username):         
     f = open("db\students.csv","r")
     studentlist = []
     for i in f:
@@ -142,7 +142,7 @@ def get_student_id_from_username(username):         #tested
         if i[2] == username:
             return i[0]
 
-def get_class_id_from_username(username):
+def get_class_id_from_username(username):           
     f = open("db\students.csv","r")
     studentlist = []
     for i in f:
@@ -151,7 +151,8 @@ def get_class_id_from_username(username):
         if i[2] == username:
             return i[5]
 
-def get_class_id_from_id(student_id):
+def get_class_id_from_id(student_id):               
+    student_id = str(student_id)
     f = open("db\students.csv","r")
     studentlist = []
     for i in f:
@@ -159,6 +160,11 @@ def get_class_id_from_id(student_id):
     for i in studentlist:
         if i[0] == student_id:
             return i[5]
+
+def add_deck(deck_id,description,classes):
+    
+    pass
+
 
 if __name__ == '__main__':
     # Place tests here
@@ -173,5 +179,7 @@ if __name__ == '__main__':
     #print(get_student_from_username("qi"))
     #print(get_student_from_id("81016471"))
     #print(get_student_id_from_username("qi"))
+    #print(get_class_id_from_username("qi"))
+    #print(get_class_id_from_id(81016471))
     pass
 
