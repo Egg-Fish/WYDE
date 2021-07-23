@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <link href="bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="asset/css/cards-holders.css" rel="stylesheet">
+<script type="text/javascript">
+  window.onload = function() {
+    if(localStorage.getItem("username")) {
+      document.getElementById("testing").innerText = localStorage.getItem("username");
+    }
+  }
+</script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="main-page.html">KYDE EDU</a></h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="#">Deck</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li class="dropdown"><a href="#"><span>Add new</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="add-deck.html">Add Decks</a></li>
+              <li><a href="add-fc.html">Add Flashcards / Quiz Questions</a></li>
+
+            </ul>
+          </li>
+          <!--<li class="dropdown"><a href="#"><span>Classes</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+            </ul>-->
+          <li class="display">
+            <a id="imagess" href="sign-up.html"><img src="asset/images/images.png"><pre>  </pre><p id="testing" class="account text" style="font-size: 15px;"></p></a>
+            <ul>
+              <li><a href="landing-page.html">Sign out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <div class="container main">
+    <div class="card">
+      <p class="big"><i class="fas fa-book mr-2"></i>What is dog</p>
+      <p>The booga</p>
+      <button class="button" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>What is cat</p>
+      <p class="text">Te booga</p>
+      <button class="button text" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>What is cat</p>
+      <p class="text">Te booga</p>
+      <button class="button text" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>What is cat</p>
+      <p class="text">Te booga</p>
+      <button class="button text" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>What is cat</p>
+      <p class="text">Te booga</p>
+      <button class="button text" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>What is cat</p>
+      <p class="text">Te booga</p>
+      <button class="button text" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>What is cat</p>
+      <p class="text">Te booga</p>
+      <button class="button text" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+    <div class="card">
+      <p class="big text"><i class="fas fa-book mr-2"></i>What is cat</p>
+      <p class="text">Te booga</p>
+      <button class="button text" onclick="window.location.href='/editcard.html'">Edit card</button>
+    </div>
+
+  </div>
+</body>
+</html>
