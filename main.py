@@ -22,7 +22,12 @@ def login():
     username = request.form["username"]
     password = request.form["password"]
 
+    # Authenticate
+
     session["username"] = username
+    student = dbcontroller.get_student_from_username(username)
+    session["student"] = student
+
     return redirect("/dashboard.html")
 
 @app.route("/addflashcard", methods=["GET", "POST"])
@@ -42,9 +47,6 @@ def addquizquestion():
         answer = request.form["answer"]
 
         dbcontroller.add_quizquestion(int(deck_id), question, answer)
-
-
-
 
 
 
@@ -91,6 +93,19 @@ def attemptQuestion(data):
         attempt = data["attempt"]
         result = quiz.attempt_quizquestion(card_id, attempt)
         emit("attemptQuestion", {"result": result, "current_card": current_card})
+
+@socketio.event
+def getDecks(data):
+    player = session["player"]
+
+    deck_ids = dbcontroller.get_decks_from_class_id(player["class_id"])
+
+    emit("getDecks", deck_ids)
+
+@socketio.event
+def getDeckInfo(data):
+    deck = dbcontroller.get_deck_from_deck_id(data["deck_id"])
+    emit("getDeckInfo", deck)
 
 
 # TEST
