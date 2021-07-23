@@ -1,0 +1,197 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+}
+
+
+a{
+  text-decoration: none;
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+  background-color: white;
+  transition: all 0.5s;
+  z-index: 997;
+  padding: 10px 0;
+  position: sticky;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+#header.header-scrolled {
+  padding: 12px 0;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+#header .logo {
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+#header .logo a {
+  color: #111111;
+}
+
+#header .logo a span {
+  color: #e03a3c;
+}
+
+#header .logo img {
+  max-height: 40px;
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/**
+* Desktop Navigation
+*/
+.navbar {
+  padding-right: 50px;
+  color: red;
+}
+
+.navbar img {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar li {
+  position: relative;
+  color: black;
+}
+
+.display{
+
+}
+
+.account{
+  font-size: 20px;
+  margin: 0 20px 0 0;
+}
+
+.account:hover{
+  color: black;
+}
+
+.navbar a, .navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px 30px;
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar a i, .navbar a:focus i {
+  font-size: 12px;
+  line-height: 0;
+  margin-left: 5px;
+}
+
+.navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
+  color: red;
+}
+
+.navbar .dropdown ul, .navbar .display ul {
+  display: block;
+  position: absolute;
+  left: 30px;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  background: #fff;
+  transition: 0.3s;
+  color: red;
+}
+
+.navbar .dropdown ul li, .navbar .display ul li {
+  min-width: 200px;
+  color: red;
+}
+
+.navbar .dropdown ul a, .navbar .display ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.navbar .dropdown ul a i, .navbar .display ul a i {
+  font-size: 12px;
+  color: red;
+}
+
+.navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a,
+.navbar .display ul a:hover, .navbar .display ul .active:hover, .navbar .display ul li:hover > a,{
+  color: black;
+}
+
+.navbar .dropdown:hover > ul,  .navbar .display:hover > ul{
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+  color: black;
+}
+
+
+.main {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-gap: 16px;
+  justify-content: center;
+  padding: initial;
+  margin-top: 20px;
+}
+
+.main .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: initial;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  background-color: none;
+  margin: 10px 10px;
+  padding: 10px 10px;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+}
+
+.main .card .button {
+  position: absolute;
+  bottom: 15px;
+  background: #85e481;
+  border-radius: 20px;
+  height: 50px;
+  width: 170px;
+  border: none;
+}
+
+.main .card .button:hover{
+  background: pink;
+}

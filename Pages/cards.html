@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <link href="bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="asset/css/cards.css" rel="stylesheet">
+  <script>
+    function counter(){
+      document.getElementById("questions").innerHTML = "Answer: Test"
+      document.getElementById("button").innerHTML = "Next question"
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="main-page.html">KYDE EDU</a></h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="#">Deck</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <!--<li class="dropdown"><a href="#"><span>Classes</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+            </ul>-->
+          <li class="display">
+            <a id="imagess" href="sign-up.html"><img src="asset/images/images.png"><p class="account text" style="font-size: 15px;">ONG YONG LIN</p></a>
+            <ul>
+              <li><a href="landing-page.html">Sign out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <div class="container main">
+    <h2 id="questions" style="padding-top: 40px"><span style="text-decoration: underline; ">Question: </span><br> How many schools are there in SG</h2>
+    <button id="button" class="button" onclick="counter()">Reveal Answers</button>
+  </div>
+
+
+
+</body>
+</html>
