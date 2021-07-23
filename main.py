@@ -110,7 +110,7 @@ def nextCard(data):
     inQuiz = False
 
     if "inQuiz" in session:
-        inQuiz = True
+        inQuiz = session["inQuiz"]
 
     current_card = dbcontroller.get_flashcard(current_card_id)
     if not current_card:
