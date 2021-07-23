@@ -218,6 +218,18 @@ def modify_score(student_id,score):
         wf.write("\n")
     wf.close()
 
+def get_cards_in_deck(deck_id):
+    deck_id = str(deck_id)
+    f = open("db\cards.csv","r")
+    cardlist = []
+    cards_indeck = []
+    for i in f:
+        cardlist.append(i.strip("\n").split(","))
+    f.close()
+    for i in cardlist:
+        if i[1] == deck_id:
+            cards_indeck.append(i[0])
+    return cards_indeck                 #elements in this list is a str please map if need int
 
 
 
@@ -242,5 +254,6 @@ if __name__ == '__main__':
     #add_score(81016471, 1, 900)
     #add_score(12345678, 1, 901)
     #modify_score(81016471, 1)
+    #print(get_cards_in_deck(1))
     pass
 
