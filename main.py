@@ -208,6 +208,16 @@ def editcard(card_id):
 
         return redirect("/")
 
+@app.route("/quiz")
+def quizzes():
+    if "student" not in session:
+        return render_template("landing-page.html") # login
+
+    else:
+        decks = dbcontroller.get_decks()
+        student = session["student"]
+        return render_template("quizzes.html", decks=decks, dbcontroller=dbcontroller, student=student)
+
 #  ____   ___   ____ _  _______ _____ ___ ___  
 # / ___| / _ \ / ___| |/ / ____|_   _|_ _/ _ \ 
 # \___ \| | | | |   | ' /|  _|   | |  | | | | |

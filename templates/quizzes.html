@@ -8,7 +8,7 @@
     <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="{{url_for('static', filename='asset/css/main-page.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='asset/css/quizzes.css')}}" rel="stylesheet">
 
   </head>
 
@@ -66,7 +66,7 @@
         {% if student[-1] == "TEACHER" %}
         <button class="button text" onclick="window.location = '/editdeck/{{ deck[0] }}'">Edit Deck</button>
         {% else %}
-        <button class="button text" onclick="window.location = '/startdeck/{{ deck[0] }}'">Start Revision</button>
+        <button class="button text" onclick="window.location = '/startquiz/{{ deck[0] }}'">Start Quiz</button>
         {% endif %}
       </div>
 
