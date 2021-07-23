@@ -98,3 +98,5 @@ if __name__ == '__main__':
     #print(get_flashcard(5))
     #remove_flashcard(6)
     pass
+
+add_flashcard(1,"1.1+1.2?",2.3)
