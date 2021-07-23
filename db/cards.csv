@@ -1,11 +1,10 @@
 id,deck_id,question,answer,points
-0000,0,,,0
-4,1,pumpkin,hi,500
-5,1,Are you yonglin?,Yes I am ONG,0
-7,1,Are you yonglin?,Yes I am ONG,0
-8,1,1 + 1 = ?,2,500
-9,1,Are you yonglin?,Yes I am ONG,0
-10,1,1 + 1 = ?,2,500
-11,1,1.1+1.2?,2.3,0
-12,1,pumpkin,hi,999
-13,1,1.1+1.2?,2.3,0
+0,0,,,0
+1,1,This question is in deck one,true,0
+2,1,This question is also in deck one,true,0
+3,1,This question is in deck one but as a quiz,true,500
+4,1,This question is also in deck one but as a quiz,true,500
+5,1,This question is in deck two,true,0
+6,1,This question is also in deck two,true,0
+7,1,This question is in deck two but as a quiz,true,500
+8,1,This question is also in deck one but as a quiz,true,500
