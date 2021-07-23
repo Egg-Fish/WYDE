@@ -1,4 +1,4 @@
-from dbcontroller import get_flashcard, get_quizquestion
+from dbcontroller import get_flashcard
 
 
 def check_equal(attempt, answer):
@@ -36,7 +36,7 @@ def check_equal(attempt, answer):
     pass
 
 def attempt_quizquestion(id, attempt):
-    flashcard = get_quizquestion(id)
+    flashcard = get_flashcard(id)
     answer = flashcard[3]
     if answer.isdigit():
         answer = int(answer)
@@ -45,10 +45,10 @@ def attempt_quizquestion(id, attempt):
             answer = float(answer)
         except ValueError:
             answer = str(answer)
-    check_equal(attempt,answer)
+    return check_equal(attempt,answer)
     pass
 
 if __name__ == '__main__':
-    print(attempt_quizquestion(4, 2))
+    print(attempt_quizquestion(11, 2.3))
     # Place tests here
     pass
