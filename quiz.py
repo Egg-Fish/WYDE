@@ -45,6 +45,15 @@ def attempt_quizquestion(id, attempt):
             answer = float(answer)
         except ValueError:
             answer = str(answer)
+
+    if attempt.isdigit():
+        attempt = int(attempt)
+    else:
+        try:
+            attempt = float(attempt)
+        except ValueError:
+            attempt = str(attempt)
+            
     return check_equal(attempt,answer)
     pass
 

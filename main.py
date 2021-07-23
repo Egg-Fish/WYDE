@@ -11,7 +11,7 @@ import quiz
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(24)
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode="eventlet")
 
 
 
@@ -175,9 +175,9 @@ def startquiz(deck_id):
     if "student" not in session:
         return redirect("/") # login
 
-    session["current_card_id"] = 0
     session["inQuiz"] = True
-    return render_template("REMOVE", deck_id=deck_id)
+    deck = dbcontroller.get_deck_from_deck_id(deck_id)
+    return render_template("cards.html", deck=deck, student=session["student"], dbcontroller=dbcontroller)
 
 #  ____   ___   ____ _  _______ _____ ___ ___  
 # / ___| / _ \ / ___| |/ / ____|_   _|_ _/ _ \ 
@@ -189,18 +189,25 @@ def startquiz(deck_id):
 @socketio.event
 def nextCard(data):
     current_card_id = int(data["id"])
+
+    if current_card_id == -1:
+        next_card_id = dbcontroller.get_cards_in_deck(data["deck_id"])[0]
+        next_card = dbcontroller.get_flashcard(next_card_id)
+        emit("nextCard", next_card)
+        return
+
     inQuiz = False
 
     if "inQuiz" in session:
         inQuiz = session["inQuiz"]
 
     current_card = dbcontroller.get_flashcard(current_card_id)
-    if not current_card:
-        current_card = dbcontroller.get_quizquestion(current_card_id)
 
     next_card = dbcontroller.get_flashcard(current_card_id+1)
+
     if not next_card:
-        next_card = dbcontroller.get_quizquestion(current_card_id+1)
+        emit("endOfDeck")
+        return
 
     if int(next_card[-1]) > 0 and not inQuiz:
         emit("endOfDeck")
@@ -219,8 +226,6 @@ def nextCard(data):
 def attemptQuestion(data):
     card_id = int(data["id"])
     current_card = dbcontroller.get_flashcard(card_id)
-    if not current_card:
-        current_card = dbcontroller.get_quizquestion(card_id)
 
     if int(current_card[-1]) == 0:
         emit("attemptQuestion", {"result": True, "current_card": current_card})
@@ -268,8 +273,9 @@ def testrender(filename):
 
 
 if __name__ == "__main__":
-    app.run(
-        host="localhost",
+    socketio.run(
+        app=app,
+        host="0.0.0.0",
         port=80,
         debug=True
     )

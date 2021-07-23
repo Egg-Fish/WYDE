@@ -9,6 +9,12 @@ a{
   text-decoration: none;
 }
 
+form{
+  position: inherit;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+
 #header {
   background-color: white;
   transition: all 0.5s;

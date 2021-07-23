@@ -10,7 +10,75 @@
   <!-- Template Main CSS File -->
   <link href="{{url_for('static', filename='asset/css/cards.css')}}" rel="stylesheet">
 
-  <script scr="/static/socket.io.js"></script>
+  <script src="/static/socket.io.js"></script>
+  <script>
+    var socket = io();
+    var current_card_no = -1;
+
+    function nextCard()
+    {
+      var deck_id = window.location.pathname.slice(-8);
+      console.log(current_card_no);
+      console.log(deck_id);
+      socket.emit("nextCard", {"id": current_card_no, "deck_id": deck_id});
+    }
+
+    socket.on("nextCard", function(data){
+      console.log(data);
+      var question = document.getElementById("questions");
+      card = data;
+      current_card_no = parseInt(card[0], 10);
+      points = parseInt(card[4], 10);
+      question.innerHTML = "<span style='text-decoration: underline;'>Question:</span><br>" + card[2];
+
+      if (points > 0){
+        document.getElementsByTagName("form")[0].setAttribute("style", "display:block");
+      }
+      else{
+        document.getElementsByTagName("form")[0].setAttribute("style", "display:none");
+      }
+      
+      var btn = document.getElementById("button");
+      btn.setAttribute("onclick", "attemptQuestion()");
+      btn.innerText = "Show Answer";
+    });
+
+
+    function attemptQuestion()
+    {
+      var deck_id = window.location.pathname.slice(-8);
+      console.log(current_card_no);
+      console.log(deck_id);
+      document.getElementsByTagName("form")[0].setAttribute("style", "display:none");
+      attempt = document.getElementById("attempt").value;
+      document.getElementById("attempt").value = "";
+      socket.emit("attemptQuestion", {"id": current_card_no, "attempt": attempt, "deck_id": deck_id});
+    }
+
+    socket.on("attemptQuestion", function(data){
+      console.log(data);
+      var question = document.getElementById("questions");
+      card = data["current_card"];
+      current_card_no = parseInt(card[0], 10);
+      question.innerHTML = "<span style='text-decoration: underline;'>Answer:</span><br>" + card[3];
+      
+      var btn = document.getElementById("button");
+      btn.setAttribute("onclick", "nextCard()");
+      btn.innerText = "Next Question";
+    });
+
+    socket.on("endOfDeck", function(){
+      console.log("received endOfDeck SIGNAL");
+      var question = document.getElementById("questions");
+      question.innerHTML = "<span style='text-decoration: underline;'>End of Deck:</span><br>" + "You have finished all of the cards in this deck.";
+      
+      var btn = document.getElementById("button");
+      btn.setAttribute("onclick", "window.location = '/';");
+      btn.innerText = "End Revision";
+    });
+
+  </script>
+
 </head>
 
 <body>
@@ -51,16 +119,15 @@
 
   <div class="container main">
     <h2 id="questions" style="padding-top: 40px">
-      <span style="text-decoration: underline; ">{{ deck[1] }}:</span><br> 
+      <span style="text-decoration: underline; ">{{ deck[1] }}</span><br> 
       This deck consists of {{ dbcontroller.get_cards_in_deck(deck[0])|length }} cards.
     </h2>
+    <form style="display: none" onsubmit="return false">
+      <label for="answers">Enter your answers:</label>
+      <input type="text" id="attempt" name="answers" minlength="2" size="10" autofocus required>
+    </form>
     <button id="button" class="button" onclick="nextCard()">Start Deck</button>
   </div>
-
-  <script defer>
-    var socket = io();
-
-  </script>
 
 </body>
 </html>
