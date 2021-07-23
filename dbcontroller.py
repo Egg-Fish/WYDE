@@ -34,7 +34,6 @@ def remove_flashcard(id):
     f.close()
 
     for i in range(len(lines)):
-        print(lines[i][0])
         if lines[i][0] == id:
             del lines[i]
             break
@@ -97,4 +96,5 @@ if __name__ == '__main__':
     #add_quizquestion(1,"1 + 1 = ?", "2", 500)
     #modify_quizquestion(6,"pumpkin","hi",999)
     #print(get_flashcard(5))
+    #remove_flashcard(6)
     pass
