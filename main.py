@@ -1,3 +1,7 @@
+import os
+import random
+import hashlib
+
 from flask import Flask, render_template, send_file, request, make_response, session, redirect
 from flask_socketio import SocketIO, send, emit
 
@@ -9,20 +13,37 @@ app.config["SECRET_KEY"] = "secret"
 
 socketio = SocketIO(app)
 
+
+
 #  ____   ___  _   _ _____ _____ ____  
 # |  _ \ / _ \| | | |_   _| ____/ ___| 
 # | |_) | | | | | | | | | |  _| \___ \ 
 # |  _ <| |_| | |_| | | | | |___ ___) |
 # |_| \_\\___/ \___/  |_| |_____|____/ 
 
+def authenticate(username, password):
+    student = dbcontroller.get_student_from_username(username)
+
+    password_hash = hashlib.sha256(bytes(password, encoding='utf-8')).hexdigest()
+
+    student_hash = student[3]
+
+    return password_hash == student_hash
+    
+
 @app.route("/addstudent", methods=["POST"])
 def addstudent():
     student_id = request.form["student_id"]
     name = request.form["name"]
     username = request.form["username"]
+    password = request.form["password"]
+    password_hash = hashlib.sha256(bytes(password, encoding='utf-8')).hexdigest()
+
     email = request.form["email"]
     class_id = request.form["class_id"]
 
+    dbcontroller.add_student(student_id,name,username,password_hash,email,class_id)
+    return "DONE"
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -31,16 +52,19 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        # Authenticate
+        if authenticate(username, password):
 
-        session["username"] = username
-        student = dbcontroller.get_student_from_username(username)
-        session["student"] = student
+            session["username"] = username
+            student = dbcontroller.get_student_from_username(username)
+            session["student"] = student
 
-        return redirect("/dashboard.html")
+            return redirect("/dashboard.html")
+        
+        else:
+            return render_template("REMOVE") # login page
 
     elif request.method == "GET":
-        return "REMOVE"
+        return render_template("REMOVE") # login page
 
 @app.route("/addflashcard", methods=["GET", "POST"])
 def addflashcard():
@@ -170,15 +194,16 @@ def getUserInfo():
 
 # TEST
 
-@app.route("/<path>")
+@app.route("/test/<path:path>")
 def test(path):
-    return render_template(path)
+    print(path)
+    return send_file("Pages/" + path)
 
 
 
 if __name__ == "__main__":
     app.run(
         host="localhost",
-        port=8080,
+        port=80,
         debug=True
     )
