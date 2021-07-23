@@ -106,41 +106,6 @@ def signout():
 
     return redirect("/")
 
-@app.route("/addflashcard", methods=["GET", "POST"])
-def addflashcard():
-    if request.method == "POST":
-        deck_id = request.form["deck_id"]
-        question = request.form["question"]
-        answer = request.form["answer"]
-
-        dbcontroller.add_flashcard(int(deck_id), question, answer)
-
-    elif request.method == "GET":
-        return "REMOVE"
-
-@app.route("/addquizquestion", methods=["GET", "POST"])
-def addquizquestion():
-    if request.method == "POST":
-        deck_id = request.form["deck_id"]
-        question = request.form["question"]
-        answer = request.form["answer"]
-
-        dbcontroller.add_quizquestion(int(deck_id), question, answer)
-
-    elif request.method == "GET":
-        return "REMOVE"
-
-@app.route("/adddeck", methods=["GET", "POST"])
-def adddeck():
-    if request.method == "POST":
-        deck_id = random.randint(10000000, 99999999)
-        name = request.form["name"]
-        description = request.form["description"]
-
-        dbcontroller.add_deck(deck_id, name, description)
-
-    elif request.method == "GET":
-        return "REMOVE"
 
 @app.route("/", methods=["GET"])
 def index():
@@ -205,6 +170,39 @@ def addfc():
         decks = dbcontroller.get_decks()
         return render_template("add-fc.html", student=session["student"], dbcontroller=dbcontroller, decks=decks, success=True)
 
+@app.route("/adddeck", methods=["GET", "POST"])
+def adddeck():
+    if "student" not in session:
+        return redirect("/") # login
+
+    if request.method == "GET":
+        return render_template("add-deck.html", student=session["student"], dbcontroller=dbcontroller, success=False)
+
+    elif request.method == "POST":
+        deck_id = random.randint(10000000,99999999)
+
+        dbcontroller.add_deck(deck_id, request.form["name"], request.form["description"])
+
+        return render_template("add-deck.html", student=session["student"], dbcontroller=dbcontroller, success=True)
+
+@app.route("/editcard/<card_id>", methods=["GET", "POST"])
+def editcard(card_id):
+    if "student" not in session:
+        return redirect("/") # login
+
+    if request.method == "GET":
+        decks = dbcontroller.get_decks()
+        card = dbcontroller.get_flashcard(card_id)
+        return render_template("edit-fc.html", student=session["student"], dbcontroller=dbcontroller, card=card, success=False)
+
+    elif request.method == "POST":
+        if request.form["method"] == "EDIT":
+            dbcontroller.modify_flashcard(card_id, request.form["question"], request.form["answer"])
+            
+        elif request.form["method"] == "DELETE":
+            dbcontroller.remove_flashcard(card_id)
+
+        return redirect("/")
 
 #  ____   ___   ____ _  _______ _____ ___ ___  
 # / ___| / _ \ / ___| |/ / ____|_   _|_ _/ _ \ 

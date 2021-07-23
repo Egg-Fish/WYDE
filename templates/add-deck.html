@@ -8,10 +8,10 @@
     <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
   
     <!-- Template Main CSS File -->
-    <link href="{{url_for('static', filename='asset/css/add-fc.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='asset/css/add-deck.css')}}" rel="stylesheet">
 
     {% if success %}
-    <script>alert("Flashcard Created Successfully!");</script>
+    <script>alert("Deck Created Successfully!");</script>
     {% endif %}
   </head>
 
@@ -52,33 +52,18 @@
 </header><!-- End Header -->
 
   <div class="sign-up">
-    <h3>Add Flashcards</h3>
-    <form id="form" method="post" action="/addfc">
-        <div class="deck">
-          <label for="deck_id">Deck: </label><br>
-          <select id="deck_id" name="deck_id" style="width: 160px; height: 36px;">
-            <!-- Dropdown values -->
-            <!-- <option value="value1">value1</option> -->
-            {% for deck in decks %}
-            <option value="{{deck[0]}}">{{deck[1]}}</option>
-            {% endfor %}
+    <h3>Add Deck</h3>
+    <form id="form" method="POST" action="/adddeck">
+      <label for="name">Name: </label><br>
+      <input type="text" id="name" name="name" size="33" autofocus required><br><br>
 
-          </select><br>
-        </div>
-
-      <div class="beside-deck">
-        <label for="points">Points: </label><br>
-        <input type="number" id="points" name="points">
-      </div><br>
-
-      <label for="question">Question:</label><br>
-      <textarea name="question" cols="45" rows="2" required></textarea>
-      <label for="answer">Answer:</label><br>
-      <textarea name="answer" cols="45" rows="3" required></textarea>
+      <label for="description">Description:</label><br>
+      <textarea name="description" id="description" cols="36" rows="4" required></textarea>
 
       <div class="sign-up-2">
         <input id="hello" type="submit" value="Add">
       </div>
+
     </form>
     <p><span id='display'></span></p>
   </div>

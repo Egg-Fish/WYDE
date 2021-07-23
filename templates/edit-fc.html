@@ -52,32 +52,17 @@
 </header><!-- End Header -->
 
   <div class="sign-up">
-    <h3>Add Flashcards</h3>
-    <form id="form" method="post" action="/addfc">
-        <div class="deck">
-          <label for="deck_id">Deck: </label><br>
-          <select id="deck_id" name="deck_id" style="width: 160px; height: 36px;">
-            <!-- Dropdown values -->
-            <!-- <option value="value1">value1</option> -->
-            {% for deck in decks %}
-            <option value="{{deck[0]}}">{{deck[1]}}</option>
-            {% endfor %}
-
-          </select><br>
-        </div>
-
-      <div class="beside-deck">
-        <label for="points">Points: </label><br>
-        <input type="number" id="points" name="points">
-      </div><br>
+    <h3>Edit Flashcard</h3>
+    <form id="form" method="post" action="/editcard/{{ card[0] }}">
+        
 
       <label for="question">Question:</label><br>
-      <textarea name="question" cols="45" rows="2" required></textarea>
+      <textarea name="question" cols="45" rows="2" required>{{ card[2] }}</textarea>
       <label for="answer">Answer:</label><br>
-      <textarea name="answer" cols="45" rows="3" required></textarea>
+      <textarea name="answer" cols="45" rows="5" required>{{ card[3] }}</textarea>
 
       <div class="sign-up-2">
-        <input id="hello" type="submit" value="Add">
+        <input id="hello" type="submit" name="method" value="EDIT">
       </div>
     </form>
     <p><span id='display'></span></p>
