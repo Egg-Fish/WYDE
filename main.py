@@ -43,11 +43,15 @@ def addstudent():
     password = request.form["password"]
     password_hash = hashlib.sha256(bytes(password, encoding='utf-8')).hexdigest()
 
-    email = request.form["email"]
-    class_id = request.form["class_id"]
+    dbcontroller.add_student(student_id,name,username,password_hash,f"{username}@wdye.com.sg",1)
 
-    dbcontroller.add_student(student_id,name,username,password_hash,email,class_id)
-    return "DONE"
+    session["username"] = username
+    session["student"] = dbcontroller.get_student_from_username(username)
+    return redirect("/")
+
+@app.route("/signup")
+def signup():
+    return render_template("sign-up.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -198,7 +202,7 @@ def editcard(card_id):
     elif request.method == "POST":
         if request.form["method"] == "EDIT":
             dbcontroller.modify_flashcard(card_id, request.form["question"], request.form["answer"])
-            
+
         elif request.form["method"] == "DELETE":
             dbcontroller.remove_flashcard(card_id)
 
