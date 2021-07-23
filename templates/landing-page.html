@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Web dev</title>
+
+  <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{{url_for('static', filename='asset/css/style.css')}}" rel="stylesheet">
+
+</head>
+<body>
+  <script>
+	function validate() {
+		var teachlg = ["TANCL", "TAYQW"]
+    var teacher = ["MR TAN CHENG LONG", "MDM TAY QING WEI"]
+		var username = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+
+		for(var i in teachlg) {
+			if(username == teachlg[i] && password == "Teach@789") {
+        localStorage.setItem("username", teacher[i]);
+				window.location.href = "main-page.html";
+
+			}
+		}
+
+		document.getElementById("passwrong").innerHTML = "Invalid password OR username";
+
+		return false;
+	}
+  </script>
+  <div class="contain">
+    <div class="word">
+      <h1>KYDE Learn</h1>
+      <div class="log-head">
+        <img src="{{url_for('static', filename='asset/images/teacher.png')}}" width="80"><br><br>
+        <h4><pre>  <a href="/student" style="color: red;">Student</a> / <a href="/teacher">Teacher</a></pre></h4>
+      </div>
+    </div>
+    <div class="log-in">
+      <form id="form" method="post" action="/login">
+      <label for="username">Username</label><br>
+      <input type="text" id="username" name="username" size="33" autofocus required><br><br>
+      <label for="pass">Password</label><br>
+      <input type="password" id="password" name="password" size="33" autofocus required><br>
+      <p id="passwrong"></p><br>
+      <div class="sign-up-2">
+        <input id="hello" type="submit" value="Log In" onclick="validate()">
+      </div>
+      </form>
+      <p><span id='display'></span></p>
+    </div>
+  </div>
+</body>
+</html>

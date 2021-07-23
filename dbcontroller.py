@@ -183,6 +183,15 @@ def get_deck_from_deck_id(deck_id):
         if i[0] == deck_id:
             return i
 
+def get_decks():
+    f = open("db\decks.csv", "r")
+    decklist = []
+    decks = []
+    for i in f:
+        if i[0] != 'd':
+            decklist.append(i.strip("\n").split(","))
+    f.close()
+    return decklist
 
 def get_decks_from_name(name):
     f = open("db\decks.csv", "r")

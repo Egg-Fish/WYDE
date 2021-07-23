@@ -1,0 +1,91 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+
+body{
+  background-image: url("../images/bg1.png");
+  background-repeat: repeat-x;
+}
+
+.contain{
+  border: 2px solid red;
+  width: 400px;
+  margin: 80px auto;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.log-head{
+  padding: 20px 0px 0px 50px;
+}
+
+.log-head img{
+  float: left;
+}
+
+.log-head h4{
+  font-weight: bold;
+  font-family: Helvetica,sans-serif;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 24px;
+  left: 0px;
+}
+
+.word{
+  line-height: 60%;
+  padding-top: 30px;
+}
+
+.word > h1{
+  font-weight: bold;
+  font-family: Helvetica,sans-serif;
+  text-align: center;
+  color: black;
+  font-size: 30px;
+}
+
+.log-in{
+  color: black;
+  margin: 50px auto;
+  width:290px;
+  font-size: 20px;
+  color: grey;
+  size: 323px;
+  line-height: 31px;
+  padding-top: 20px;
+}
+
+.log-in input[type=text],
+.log-in input[type=password]{
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  outline: none;
+  color: red;
+  font-size: 16px;
+}
+
+ .sign-up-2{
+   line-height: 40px;
+ }
+
+#hello{
+  display:block;
+  width: 300px;
+  height: 40px;
+  color: white;
+  background-color: red;
+  border: none;
+}
+
+#hello:hover{
+  background-color: #f08080;
+}
