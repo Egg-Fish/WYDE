@@ -161,9 +161,23 @@ def get_class_id_from_id(student_id):
         if i[0] == student_id:
             return i[5]
 
-def add_deck(deck_id,description,classes):
-    
-    pass
+def add_deck(deck_id,name,description):         #EUGENIO DO THEY TYPE THE DECK_ID THEMSELVES
+    f = open("db\decks.csv", "a+")
+    f.write("{},{},{}\n".format(deck_id,name,description))
+
+def get_deck_from_deck_id(deck_id):
+    deck_id = str(deck_id)
+    f = open("db\decks.csv", "r")
+    decklist = []
+    for i in f:
+        decklist.append(i.strip("\n".split(",")))
+    for i in studentlist:
+        if i[0] == deck_id:
+            return i
+    f.close()
+
+
+
 
 
 if __name__ == '__main__':
@@ -181,5 +195,7 @@ if __name__ == '__main__':
     #print(get_student_id_from_username("qi"))
     #print(get_class_id_from_username("qi"))
     #print(get_class_id_from_id(81016471))
+    #add_deck(1, "CSF1", "Cybersecurity Fundamentals")
+    print(get_deck_from_deck_id(1))
     pass
 
