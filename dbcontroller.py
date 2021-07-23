@@ -21,7 +21,7 @@ def add_quizquestion(deck_id, question, answer, points):
     f = open("db\cards.csv", "a+")
     flashcard_id = str(int(lines[-1][0]) + 1)           #taking reference from the last line's id, + 1
     f.write("{},{},{},{},{}\n".format(flashcard_id, deck_id, str(question), str(answer), points))
-
+    f.close()
 
 def remove_flashcard(id):
     id = str(id)
@@ -91,6 +91,7 @@ def get_flashcard(id) -> list:
 def add_student(student_id,name,username,password,email,class_id):      
     f = open("db\students.csv","a+")
     f.write("{},{},{},{},{},{}\n".format(student_id,name,username,password,email,class_id))
+    f.close()
 
 def remove_student(student_id):     
     student_id = str(student_id)
@@ -119,6 +120,7 @@ def get_student_from_username(username):
     studentlist = []
     for i in f:
         studentlist.append(i.strip("\n").split(","))
+    f.close()
     for i in studentlist:
         if i[2] == username:
             return i
@@ -129,6 +131,7 @@ def get_student_from_id(student_id):
     studentlist = []
     for i in f:
         studentlist.append(i.strip("\n").split(","))
+    f.close()
     for i in studentlist:
         if i[0] == student_id:
             return i
@@ -138,6 +141,7 @@ def get_student_id_from_username(username):
     studentlist = []
     for i in f:
         studentlist.append(i.strip("\n").split(","))
+    f.close()
     for i in studentlist:
         if i[2] == username:
             return i[0]
@@ -147,6 +151,7 @@ def get_class_id_from_username(username):
     studentlist = []
     for i in f:
         studentlist.append(i.strip("\n").split(","))
+    f.close()
     for i in studentlist:
         if i[2] == username:
             return i[5]
@@ -157,6 +162,7 @@ def get_class_id_from_id(student_id):
     studentlist = []
     for i in f:
         studentlist.append(i.strip("\n").split(","))
+    f.close()
     for i in studentlist:
         if i[0] == student_id:
             return i[5]
@@ -164,6 +170,7 @@ def get_class_id_from_id(student_id):
 def add_deck(deck_id,name,description):         
     f = open("db\decks.csv", "a+")
     f.write("{},{},{}\n".format(deck_id,name,description))
+    f.close()
 
 def get_deck_from_deck_id(deck_id):
     deck_id = str(deck_id)
@@ -171,10 +178,11 @@ def get_deck_from_deck_id(deck_id):
     decklist = []
     for i in f:
         decklist.append(i.strip("\n").split(","))
+    f.close()
     for i in decklist:
         if i[0] == deck_id:
             return i
-    f.close()
+
 
 def get_decks_from_name(name):
     f = open("db\decks.csv", "r")
@@ -182,10 +190,34 @@ def get_decks_from_name(name):
     decks = []
     for i in f:
         decklist.append(i.strip("\n").split(","))
+    f.close()
     for i in decklist:
         if i[1] == name:
             decks.append(i[0])
     return decks                    #elements in this list is a str please map if need int
+
+def add_score(student_id,deck_id,score):
+    f = open("db\scores.csv", "a+")
+    f.write("{},{},{}\n".format(student_id,deck_id,score))
+    f.close()
+
+def modify_score(student_id,score):
+    student_id = str(student_id)
+    rf = open("db\scores.csv","r")
+    scorelist = []
+    for i in rf:
+        scorelist.append(i.strip("\n").split(","))
+    rf.close()
+
+    for i in scorelist:
+        if i[0] == str(student_id):
+            i[2] = score
+    wf = open("db\scores.csv","w+")
+    for i in range(len(scorelist)):
+        wf.write("{},{},{}".format(scorelist[i][0], scorelist[i][1], scorelist[i][2]))
+        wf.write("\n")
+    wf.close()
+
 
 
 
@@ -207,5 +239,8 @@ if __name__ == '__main__':
     #add_deck(2, "CSF1", "Design Principles")
     #print(get_deck_from_deck_id(1))
     #print(get_decks_from_name("CSF1"))
+    #add_score(81016471, 1, 900)
+    #add_score(12345678, 1, 901)
+    #modify_score(81016471, 1)
     pass
 
