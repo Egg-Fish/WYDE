@@ -1,19 +1,29 @@
-def add_flashcard(question, answer):
-    path = "\db\"
-    f = open("cards.csv","a+")
+def add_flashcard(deck_id, question, answer):
+    f = open("db\cards.csv","r")
     lines = f.readlines()
-    f.close()
-    del lines[1]
-
-    f = open("cards.csv", "w+")
-
-    for line in lines:
-        f.write(line)
-    
+    for i in range(len(lines)):
+        lines[i] = lines[i].split(',')
     f.close()
 
-def add_quizquestion(question, answer):
-    pass
+    f = open("db\cards.csv", "a+")
+    flashcard_id = str(int(lines[-1][0]) + 1)           #taking reference from the last line's id, + 1
+    f.write("\n")
+    f.write("{},{},{},{},{}".format(flashcard_id, deck_id, str(question), str(answer), 0))
+
+    f.close()
+
+def add_quizquestion(deck_id, question, answer, points):
+    f = open("db\cards.csv","r")
+    lines = f.readlines()
+    for i in range(len(lines)):
+        lines[i] = lines[i].split(',')
+    f.close()
+
+    f = open("db\cards.csv", "a+")
+    flashcard_id = str(int(lines[-1][0]) + 1)           #taking reference from the last line's id, + 1
+    f.write("\n")
+    f.write("{},{},{},{},{}".format(flashcard_id, deck_id, str(question), str(answer), points))
+
 
 def remove_flashcard(id):
     pass
@@ -36,4 +46,6 @@ def get_quizquestion(id) -> list:
 
 if __name__ == '__main__':
     # Place tests here
+    #add_flashcard(1,"Are you yonglin?","Yes I am ONG")
+    #add_quizquestion(1,"1 + 1 = ?", "2", 500)
     pass
