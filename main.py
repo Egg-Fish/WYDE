@@ -201,6 +201,11 @@ def test(path):
 
 @app.route("/render/<filename>")
 def testrender(filename):
+    if filename == "main-page.html":
+        decks = dbcontroller.get_decks()
+        return render_template("main-page.html", decks=decks, dbcontroller=dbcontroller)
+
+
     return render_template(filename)
 
 
