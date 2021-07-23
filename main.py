@@ -93,7 +93,7 @@ def addquizquestion():
 @app.route("/adddeck", methods=["GET", "POST"])
 def adddeck():
     if request.method == "POST":
-        deck_id = request.form["deck_id"]
+        deck_id = random.randint(10000000, 99999999)
         name = request.form["name"]
         description = request.form["description"]
 
