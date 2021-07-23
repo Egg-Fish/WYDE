@@ -1,6 +1,3 @@
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -11,9 +8,6 @@ a{
   text-decoration: none;
 }
 
-/*--------------------------------------------------------------
-# Header
---------------------------------------------------------------*/
 #header {
   background-color: white;
   transition: all 0.5s;
@@ -49,12 +43,6 @@ a{
   max-height: 40px;
 }
 
-/*--------------------------------------------------------------
-# Navigation Menu
---------------------------------------------------------------*/
-/**
-* Desktop Navigation
-*/
 .navbar {
   padding-right: 50px;
   color: red;
@@ -124,9 +112,8 @@ a{
   padding: 10px 0;
   z-index: 99;
   opacity: 0;
-  background: #fff;
+  background: #ECECEC;
   transition: 0.3s;
-  color: red;
 }
 
 .navbar .dropdown ul li, .navbar .display ul li {
@@ -141,19 +128,14 @@ a{
 
 .navbar .dropdown ul a i, .navbar .display ul a i {
   font-size: 12px;
-  color: red;
 }
 
-.navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a,
-.navbar .display ul a:hover, .navbar .display ul .active:hover, .navbar .display ul li:hover > a,{
-  color: black;
-}
 
 .navbar .dropdown:hover > ul,  .navbar .display:hover > ul{
   opacity: 1;
   top: 100%;
   visibility: visible;
-  color: black;
+  color: white;
 }
 
 

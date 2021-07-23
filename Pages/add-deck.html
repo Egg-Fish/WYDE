@@ -8,7 +8,7 @@
   <link href="bootstrap.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="asset/css/cards.css" rel="stylesheet">
+  <link href="asset/css/add-deck.css" rel="stylesheet">
   <script>
     function counter(){
       document.getElementById("questions").innerHTML = "Answer: Test"
@@ -30,7 +30,7 @@
           <li><a href="quiz.html">Quiz</a></li>
           <li class="dropdown"><a href="#"><span>Add new</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="add-deck.html">Add Decks</a></li>
+              <li><a href="#">Add Decks</a></li>
               <li><a href="add-fc.html">Add Flashcards / Quiz Questions</a></li>
 
             </ul>
@@ -51,9 +51,18 @@
     </div>
   </header><!-- End Header -->
 
-  <div class="container main">
-    <h2 id="questions" style="padding-top: 40px"><span style="text-decoration: underline; ">Question: </span><br> How many schools are there in SG</h2>
-    <button id="button" class="button" onclick="counter()">Reveal Answers</button>
+  <div class="sign-up">
+    <h3>Add Deck</h3>
+    <form id="form">
+    <label for="cname">Name: </label><br>
+    <input type="text" id="cname" name="cname" size="33" autofocus required><br><br>
+    <label for="desc">Description:</label><br>
+    <textarea cols="36" rows="4" required></textarea>
+    <div class="sign-up-2">
+      <input id="hello" type="submit" value="Add">
+    </div>
+    </form>
+    <p><span id='display'></span></p>
   </div>
 
 
