@@ -27,4 +27,13 @@ def modify_flashcard(id, question, answer):
 def modify_quizquestion(id, question, answer):
     pass
 
-#test
+def get_flashcard(id) -> list:
+    pass
+
+def get_quizquestion(id) -> list:
+    pass
+
+
+if __name__ == '__main__':
+    # Place tests here
+    pass
