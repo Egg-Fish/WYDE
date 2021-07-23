@@ -60,10 +60,11 @@ def get_flashcard(id) -> list:
 
 def get_quizquestion(id) -> list:
     f = open("db\cards.csv","r")
+    cardslist = []
     for i in f:
-        cardslist = i.strip("\n").split(",")
+        cardslist.append(i.strip("\n").split(","))
     for i in cardslist:
-        if i[0] == id:
+        if i[0] == str(id):
             return i
     pass
 
@@ -72,5 +73,5 @@ if __name__ == '__main__':
     # Place tests here
     #add_flashcard(1,"Are you yonglin?","Yes I am ONG")
     #add_quizquestion(1,"1 + 1 = ?", "2", 500)
-    remove_flashcard(1)
+    print(get_quizquestion(2))
     pass
