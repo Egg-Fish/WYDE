@@ -27,8 +27,16 @@
     </div>
     <div class="sign-up">
       <form id="form" method="post" action="">
-      <label for="username">Username</label><br>
-      <input type="text" id="username" name="username" pattern="[A-Z0-9]{5}" minlength="5" maxlength="5" size="33" autofocus required><br><br>
+      <div class="studid">
+        <label for="studid">Student ID</label><br>
+        <input type="text" id="studid" name="studid" pattern="[A-Z0-9]{5}" minlength="5" maxlength="5" size="10" autofocus required><br>
+      </div>
+      <div class="usern">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" pattern="[A-Z0-9]{6}" minlength="6" maxlength="6" size="11" autofocus required><br><br>
+      </div>
+      <label for="sname">Student Name</label><br>
+      <input type="text" id="sname" name="sname" minlength="5" required autofocus size="33"><br><br>
       <label for="pass">Password</label><br>
       <input type="password" id="password" name="password" size="33" autofocus required><br>
       <p id="passwrong"></p><br>
