@@ -1,15 +1,12 @@
 id,deck_id,question,answer,points
 0,0,,,0
-1,67770617,How many members are there in CodeKYDE?,4,0
-2,67770617,Who is the team leader for CodeKYDE?,Eugenio,0
-3,67770617,Which hackathon is CodeKYDE participating in?,Lifehack 2021,0
-4,67770617,Which learning concept is WYDE based upon?,Spaced Repetition,0
-5,44404618,This card is a flashcard. It contains a question and an answer. There is no input box for flashcards.,This is the answer section of the flashcard.,0
-6,44404618,Why does this learning method work?,Spaced repetition has been proven to be effective in retaining a set of knowledge over an extended period of time with little intervention from the teacher.,0
-7,44404618,This is a question that did not appear during revision. The quiz questions will now be shown after the revision. What is 3+5?,8,50
-8,44404618,This is another question. What is the full name of the school that organised Lifehack?,National University of Singapore,100
-9,44404618,Which concept is WYDE based upon?,Spaced Repetition,150
-10,92879120,Why is WYDE useful for students?,Students have been receiving lesser face-to-face interaction with their lecturers as we switch to a fully Home-Based-Learning approach. As a result these students have to depend of self-learning more than before. Lecturers are able to post questions and answers to WYDE and ask students to revise in their own pace. Students are now free to plan out their time better with this given autonomy/,0
-11,92879120,Why does WYDE work for teachers?,WYDE allows lecturers to set deck that are filled with flashcards and send them to the class. These flashcards would provide students with the right path of thinking when it comes to answering examination questions. The students receive instantaneous feedback from WYDE and a well-curated deck would be able to answer every students' answers.,0
-12,92879120,Why WYDE is proven to work.,Similar flashcard apps such as Anki have received tremendous amounts of positive feedback online from medical students studying for their examinations. WYDE mixes the concepts from these apps and adds quiz features to make it suitable as a learning platform.,0
-13,92879120,Where and when can WYDE be used?,A lecturer can create a quiz on WYDE with a few helping flashcards before he/she starts a new chapter. He/she can ask the students to do this deck of cards before the official start of the lectures. This saves the lecturer time as he/she does not need to guess whether the class is up to standard in a particular chapter; The lecturer can just see the quiz results in WYDE.,0
+1,67770617,What are the two types of communication between two people?,Verbal and Non-Verbal,0
+2,44404618,Which command returns the length of a list?,len(),0
+3,92879120,Why is a switch better than a hub,A hub will broadcast all traffic to all connected nodes. This is a security risk and it wastes available bandwidth.,0
+4,42560617,Which element uses the movement of the eyes as a form of emphasis?,Motion,0
+5,42560617,The difference between two colours is called?,Contrast,0
+6,42560617,Repetition is a design element. True or False?,True,50
+7,42560617,Which two elements are the most frequently used elements in design?,Contrast and Balance,80
+8,42560617,Why is balance important in design?,Our brains prefer things that are balanced over those that are not,140
+9,42560617,Which artist was famous for his use of repetition during the Cold War?,Michael Reeves,150
+10,42560617,When designing a product for the elderly, which element of design must be prioritised?,Form,200
