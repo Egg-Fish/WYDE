@@ -1,6 +1,12 @@
 # WYDE
 A flashcard web application for teachers and students alike
 
+![login](screenshots/front.PNG)
+
+![cards](screenshots/decks.PNG)
+
+![card](screenshots/card.PNG)
+
 ## Description
 
 WYDE is a web platform that uses the concept of spaced repetition to deliver effective learning. 
